@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -48,6 +49,7 @@ public class Tab1 extends AppCompatActivity implements View.OnClickListener {
     private EditText searchText;
     private ListView lv;
     private ListView fav_lv;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +141,19 @@ public class Tab1 extends AppCompatActivity implements View.OnClickListener {
         upload.setOnClickListener(this);
         download.setOnClickListener(this);
         add.setOnClickListener(this);
+
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) this.findViewById(R.id.swipeToRefresh);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                ca.notifyDataSetChanged();
+                cb.notifyDataSetChanged();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
     }
 
 

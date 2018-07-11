@@ -1,6 +1,7 @@
 package com.example.q.week2;
 
 import android.app.Activity;
+import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;

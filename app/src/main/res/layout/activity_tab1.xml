@@ -9,116 +9,121 @@
     android:background="@color/white"
     tools:context=".MainActivity"
     android:paddingTop="5dp">
-
-    <LinearLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
-            <ImageView
-                android:layout_width="27dp"
-                android:layout_height="27dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/mag" />
-
-            <EditText
-                android:id="@+id/searchText"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E6E6E6"
-                android:hint="Please enter..."
-                android:inputType="textNoSuggestions"
-                android:maxLines="1"/>
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/mag" />
+
+                <EditText
+                    android:id="@+id/searchText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E6E6E6"
+                    android:hint="Please enter..."
+                    android:inputType="textNoSuggestions"
+                    android:maxLines="1"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/showFavorite"
+                android:text="Favorites"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:background="@color/sky"/>
+
+            <ListView
+                android:id="@+id/lv_favorite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contacts"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:background="@color/sky"/>
+
+            <ListView
+                android:id="@+id/lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/showFavorite"
-            android:text="Favorites"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:background="@color/sky"/>
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="90dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/upload"
+            android:visibility="invisible"
+            app:backgroundTint="#ffffff"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
 
-        <ListView
-            android:id="@+id/lv_favorite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </ListView>
-
-        <TextView
-            android:layout_width="match_parent"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/download"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contacts"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:background="@color/sky"/>
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="160dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/download"
+            android:visibility="invisible"
+            app:backgroundTint="#ffffff"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
 
-        <ListView
-            android:id="@+id/lv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </ListView>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="230dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/add"
+            android:visibility="invisible"
+            app:backgroundTint="#ffffff"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
 
-    </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="90dp"
-        android:layout_marginRight="15dp"
-        android:src="@drawable/upload"
-        android:visibility="invisible"
-        app:backgroundTint="#ffffff"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="160dp"
-        android:layout_marginRight="15dp"
-        android:src="@drawable/download"
-        android:visibility="invisible"
-        app:backgroundTint="#ffffff"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="230dp"
-        android:layout_marginRight="15dp"
-        android:src="@drawable/add"
-        android:visibility="invisible"
-        app:backgroundTint="#ffffff"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="15dp"
-        android:src="@drawable/more"
-        app:backgroundTint="@color/sky"
-        app:elevation="10dp"
-        app:pressedTranslationZ="12dp" />
-
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/more"
+            app:backgroundTint="@color/sky"
+            app:elevation="10dp"
+            app:pressedTranslationZ="12dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>
