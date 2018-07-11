@@ -35,27 +35,27 @@ public class ImageAdapter extends BaseAdapter {
         if (ContextCompat.checkSelfPermission(activity,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-        }else{
+        } else {
 
-        Uri uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String[] projection = { MediaStore.MediaColumns.DATA, MediaStore.MediaColumns.DISPLAY_NAME };
+            Uri uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+            String[] projection = {MediaStore.MediaColumns.DATA, MediaStore.MediaColumns.DISPLAY_NAME};
 
 
-        Cursor cursor = mContext.getContentResolver().query(uri, projection, null, null, MediaStore.MediaColumns.DATE_ADDED + " desc");
-        int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-        int columnDisplayname = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME);
+            Cursor cursor = mContext.getContentResolver().query(uri, projection, null, null, MediaStore.MediaColumns.DATE_ADDED + " desc");
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            int columnDisplayname = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME);
 
-        int lastIndex;
-        while (cursor.moveToNext()) {
-            String absolutePathOfImage = cursor.getString(columnIndex);
-            String nameOfFile = cursor.getString(columnDisplayname);
-            lastIndex = absolutePathOfImage.lastIndexOf(nameOfFile);
-            lastIndex = lastIndex >= 0 ? lastIndex : nameOfFile.length() - 1;
+            int lastIndex;
+            while (cursor.moveToNext()) {
+                String absolutePathOfImage = cursor.getString(columnIndex);
+                String nameOfFile = cursor.getString(columnDisplayname);
+                lastIndex = absolutePathOfImage.lastIndexOf(nameOfFile);
+                lastIndex = lastIndex >= 0 ? lastIndex : nameOfFile.length() - 1;
 
-            if (!TextUtils.isEmpty(absolutePathOfImage)) {
-                files.add(absolutePathOfImage);
+                if (!TextUtils.isEmpty(absolutePathOfImage)) {
+                    files.add(absolutePathOfImage);
+                }
             }
-        }
         }
 
 
@@ -64,7 +64,7 @@ public class ImageAdapter extends BaseAdapter {
 //        files = directory.listFiles();
     }
 
-    public final void callImageViewer(int selectedIndex){
+    public final void callImageViewer(int selectedIndex) {
         Intent i = new Intent(mContext, ImagePopup.class);
         //String imgPath = files.get(selectedIndex);
         i.putExtra("fileindex", Integer.toString(selectedIndex));
@@ -97,10 +97,10 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        File imgFile = new  File(files.get(position));
+        File imgFile = new File(files.get(position));
 //        Log.d("Files",path+files[position].getName());
 //        Log.v("Files",imgFile.exists()+"");
-        if(imgFile.exists()) {
+        if (imgFile.exists()) {
 //            Log.d("Files","sdfsdff");
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             imageView.setImageBitmap(myBitmap);

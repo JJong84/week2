@@ -1,53 +1,54 @@
-package firstTabHelper;
+package secondTabHelper;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Contact.Person;
+public class GetPicture {
 
-/**
- * AsyncTask를 이용하여 REST GET콜을 통한 JSON을 얻어오는 클래스.
- */
-public class GetPerson {
-    public GetPerson() {
+    public GetPicture() {
     }
 
     private String getString;
-    private ArrayList<Person> contactList = null;
+    private ArrayList<String> pictureList = new ArrayList<>();
 
-    public ArrayList<Person> getPerson() {
+    public ArrayList<String> getPicture() {
         // inner class로 구현한 GetTask 객체를 통해 REST API콜
         Log.d("REST GET", "The response is");
-        GetTask gettask = new GetTask();
+        GetPicture.GetTask gettask = new GetPicture.GetTask();
         try {
-            getString = gettask.execute("http://52.231.68.146:8080/api/contacts").get();
+            getString = gettask.execute("http://52.231.68.146:8080/api/pictures").get();
             JSONArray json = new JSONArray(getString);
-            JSONHelper help = new JSONHelper();
+            try{
+                for(int i=0; i<json.length(); i++){
+                    JSONObject jobject = json.getJSONObject(i);
+                    if(!jobject.isNull("code")){
+                        pictureList.add(jobject.getString("code"));
+                        Log.d("REST GET3", "The response is : " + jobject.getString("code"));
+                    }
+                }
+            } catch (JSONException e) {
+                Log.d("REST GET404", "");
+                e.printStackTrace();
+            }
 
-            Log.d("REST GET", Integer.toString(json.length()));
-            contactList = help.parser(json);
         } catch (Exception e) {
             Log.d("REST GET", e.getMessage());
         }
         ;
-        return contactList;
+        return pictureList;
     }
 
     // AsyncTask를 inner class로 구현
@@ -87,6 +88,7 @@ public class GetPerson {
 
             // convert inputStream into json
             returnString = convertInputStreamToString(inputStream);
+            Log.d("REST GET123233223", returnString);
         } catch (Exception e) {
             Log.d("REST GET", "Error : " + e.getMessage());
         } finally {
