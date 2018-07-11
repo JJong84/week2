@@ -171,7 +171,7 @@ public class contactHelper {
                     .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, name).build());
         }
 
-        if (profile != null) {
+        if (!profile.equals("None")) {
             Log.d("profilecheck", profile);
             base64Converter base = new base64Converter();
             Bitmap pic = base.getBitmapFromString(profile);
@@ -185,6 +185,7 @@ public class contactHelper {
                     .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, image.toByteArray()).build());
         }
         else{
+
             Log.d("profilecheck33", profile);
         }
 

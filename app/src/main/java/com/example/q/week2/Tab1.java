@@ -148,8 +148,37 @@ public class Tab1 extends AppCompatActivity implements View.OnClickListener {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ca.notifyDataSetChanged();
-                cb.notifyDataSetChanged();
+                lv = findViewById(R.id.lv);
+                fav_lv = findViewById(R.id.lv_favorite);
+
+                result = new ArrayList<Person>();
+                getContact getcontact = new getContact();
+                result = getcontact.collect(Tab1.this);
+
+                contact = new ArrayList<Person>();
+                contact.addAll(result);
+
+                fav_res = new ArrayList<Person>();
+                not_res = new ArrayList<Person>();
+
+                for (int i = 0; i < contact.size(); i++) {
+                    if (contact.get(i).getFavorite()) {
+                        fav_res.add(contact.get(i));
+                    } else {
+                        not_res.add(contact.get(i));
+                    }
+                }
+
+                fav_con = new ArrayList<Person>();
+                fav_con.addAll(fav_res);
+                not_con = new ArrayList<Person>();
+                not_con.addAll(not_res);
+
+                ca = new ListViewAdapter(fav_res, Tab1.this);
+                fav_lv.setAdapter(ca);
+
+                cb = new ListViewAdapter(not_res, Tab1.this);
+                lv.setAdapter(cb);
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
