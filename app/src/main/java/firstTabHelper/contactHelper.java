@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.OperationApplicationException;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
@@ -16,6 +17,7 @@ import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import Contact.Person;
@@ -151,6 +153,7 @@ public class contactHelper {
         String phone = person.getPhone();
         String email = person.getEmail();
         String address = person.getAddress();
+        String profile = person.getPhoto();
 
         Log.d("success", "success");
         ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
@@ -166,6 +169,23 @@ public class contactHelper {
                     .withValue(ContactsContract.Data.MIMETYPE,
                             ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
                     .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, name).build());
+        }
+
+        if (profile != null) {
+            Log.d("profilecheck", profile);
+            base64Converter base = new base64Converter();
+            Bitmap pic = base.getBitmapFromString(profile);
+            ByteArrayOutputStream image = new ByteArrayOutputStream();
+            pic.compress(Bitmap.CompressFormat.JPEG, 100, image);
+            Log.d("profilecheck44", ContactsContract.CommonDataKinds.Photo.PHOTO);
+            ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                    .withValue(ContactsContract.Data.MIMETYPE,
+                            ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE)
+                    .withValue(ContactsContract.CommonDataKinds.Photo.PHOTO, image.toByteArray()).build());
+        }
+        else{
+            Log.d("profilecheck33", profile);
         }
 
 //------------------------------------------------------ Mobile Number

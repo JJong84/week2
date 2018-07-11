@@ -73,7 +73,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         Bitmap bm;
 
-        if(data.getPhoto()=="None"){
+        if(data.getPhoto().equals("None")){
             bm = BitmapFactory.decodeResource(context.getResources(), R.mipmap.profile);
         } else {
             bm = base.getBitmapFromString(data.getPhoto());

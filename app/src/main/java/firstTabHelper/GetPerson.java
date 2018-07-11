@@ -6,21 +6,29 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Contact.Person;
 
-/** * AsyncTask를 이용하여 REST GET콜을 통한 JSON을 얻어오는 클래스. */
+/**
+ * AsyncTask를 이용하여 REST GET콜을 통한 JSON을 얻어오는 클래스.
+ */
 public class GetPerson {
-    public GetPerson() {}
+    public GetPerson() {
+    }
+
     private String getString;
     private ArrayList<Person> contactList = null;
 
@@ -37,7 +45,8 @@ public class GetPerson {
             contactList = help.parser(json);
         } catch (Exception e) {
             Log.d("REST GET", e.getMessage());
-        };
+        }
+        ;
         return contactList;
     }
 
@@ -54,7 +63,8 @@ public class GetPerson {
 
         @Override
         protected void onPostExecute(String s) {
-            super.onPostExecute(s);;
+            super.onPostExecute(s);
+            ;
         }
     }
 
@@ -74,11 +84,11 @@ public class GetPerson {
             conn.connect();
             int response = conn.getResponseCode();
             Log.d("REST GET", "The response is : " + response);
-            inputStream = conn.getInputStream();
+            inputStream = new BufferedInputStream(conn.getInputStream());
 
 
             // convert inputStream into json
-            returnString = convertInputStreamToString(inputStream, length);
+            returnString = convertInputStreamToString(inputStream);
         } catch (Exception e) {
             Log.d("REST GET", "Error : " + e.getMessage());
         } finally {
@@ -88,16 +98,29 @@ public class GetPerson {
         return returnString;
     }
 
-    public String convertInputStreamToString(InputStream stream, int length) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        BufferedReader rd = new BufferedReader(reader);
-        char[] buffer = new char[length];
-        for(String line = rd.readLine(); line!=null; line=rd.readLine()){
-            System.out.println(line);
-
+    public String convertInputStreamToString(InputStream stream) throws IOException, UnsupportedEncodingException {
+        String returnString = "";
+        Scanner s = new Scanner(stream);
+        while(s.hasNext()){
+            returnString += s.nextLine();
         }
-        rd.close();
-        return new String(buffer);
+        s.close();
+        Log.d("REST GET",  returnString);
+        return returnString;
+        /*
+        InputStreamReader reader = new InputStreamReader(stream, "UTF-8");
+        BufferedReader rd = new BufferedReader(reader);
+        OutputStreamWriter wd = new OutputStreamWriter(returnString);
+        BufferedWriter rw = new BufferedWriter(wd);
+        try {
+            String line = rd.readLine();
+            rw.write(line);
+            rw.flush();
+            rw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnString;
+        */
     }
 }

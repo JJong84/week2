@@ -87,13 +87,13 @@ public class detailContact extends Activity {
 
         Bitmap bm;
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 8;
         Log.d("bitmapsize", person.getPhoto());
         if(person.getPhoto().equals("None")){
-            bm = BitmapFactory.decodeResource(this.getResources(), R.drawable.profile, options);
+            bm = BitmapFactory.decodeResource(this.getResources(), R.mipmap.profile);
         } else {
-            bm = BitmapFactory.decodeByteArray(Base64.decode(person.getPhoto(), Base64.DEFAULT), 0, Base64.decode(person.getPhoto(), Base64.DEFAULT).length, options);
+            bm = BitmapFactory.decodeByteArray(Base64.decode(person.getPhoto(), Base64.DEFAULT), 0, Base64.decode(person.getPhoto(), Base64.DEFAULT).length);
         }
+
         RoundedBitmapDrawable bd = RoundedBitmapDrawableFactory.create(getResources(), bm);
         bd.setCornerRadius(Math.max(bm.getWidth(), bm.getHeight()) / 2.0f);
         bd.setAntiAlias(true);

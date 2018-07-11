@@ -199,6 +199,7 @@ public class Tab1 extends AppCompatActivity implements View.OnClickListener {
 
                                 } catch (Exception e){
                                     e.printStackTrace();
+                                    Log.d("REST567", e.getMessage());
                                     Toast.makeText(getApplicationContext(), "Download failed.", Toast.LENGTH_SHORT).show();
                                 }
                             }
