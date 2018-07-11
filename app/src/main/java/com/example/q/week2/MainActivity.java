@@ -81,7 +81,7 @@ public class MainActivity extends TabActivity {
         spec = mTab.newTabSpec("Gallery").setIndicator("", getResources().getDrawable(R.drawable.gallery)).setContent(intent);
         mTab.addTab(spec);
 
-        intent = new Intent(this, Tab3.class);
+        intent = new Intent(this, DrawingActivity.class);
         spec = mTab.newTabSpec("tab3").setIndicator("", getResources().getDrawable(R.drawable.paint)).setContent(intent);
         mTab.addTab(spec);
 
