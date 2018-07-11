@@ -21,34 +21,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Tab1" />
-        <activity android:name=".Tab2" />
-        <activity android:name=".Tab3" />
-        <activity android:name=".detailContact" />
+        <activity android:name=".Tab1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Tab2"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".detailContact"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ContactAdd"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="com.example.q.week2.DrawingActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             android:label="@string/app_name" >
 
         </activity>
         <activity
             android:name="com.example.q.week2.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.AppCompat"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name=".ImagePopup" />
+            android:name=".ImagePopup"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
