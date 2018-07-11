@@ -59,11 +59,11 @@ public class WhiteBoard extends Fragment {
         isDrawer = false;
 
         EditText text = (EditText) getView().findViewById(R.id.editText2);
-        text.setVisibility(View.INVISIBLE);
+        text.setVisibility(View.GONE);
         Button btn = (Button) getView().findViewById(R.id.button);
-        btn.setVisibility(View.INVISIBLE);
+        btn.setVisibility(View.GONE);
         Button btn2 = (Button) getView().findViewById(R.id.button);
-        btn2.setVisibility(View.INVISIBLE);
+        btn2.setVisibility(View.GONE);
     }
 
     public void setNextPlayer() {
@@ -278,8 +278,8 @@ public class WhiteBoard extends Fragment {
 
                 mSocket2.emit("set answer",text.getText().toString());
 
-                btn.setVisibility(View.INVISIBLE);
-                text.setVisibility(View.INVISIBLE);
+                btn.setVisibility(View.GONE);
+                text.setVisibility(View.GONE);
                 isDrawer = true;
             }
         });
