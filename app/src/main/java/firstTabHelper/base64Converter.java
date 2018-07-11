@@ -27,6 +27,9 @@ public class base64Converter {
                 byteArrayBitmapStream);
         byte[] b = byteArrayBitmapStream.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+        Log.d("base64convert", encodedImage);
+        encodedImage = encodedImage.replaceAll("\n","");
+        Log.d("base64convert", encodedImage);
         return encodedImage;
     }
 

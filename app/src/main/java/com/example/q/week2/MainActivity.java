@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.Window;
 import android.widget.TabHost;
@@ -32,7 +33,6 @@ public class MainActivity extends TabActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         // Here, thisActivity is the current activity
         if (!hasPermissions(this, PERMISSIONS)) {

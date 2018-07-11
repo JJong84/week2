@@ -66,12 +66,16 @@ public class getContact {
                 person.setPhone(phone);
                //Log.d("phonephone", phone);
 
-                /*
                 Long photo_id = contactCursor.getLong(1);
-                photo = base.getStringFromBitmap(getImage(photo_id, context));
-                person.setPhoto(photo);
-                Log.d("loops", "contact");
-                */
+                if(photo_id==0){
+                    Log.d("photono", "");
+                    person.setPhoto("None");
+                }
+                else {
+                    photo = base.getStringFromBitmap(getImage(photo_id, context));
+                    person.setPhoto(photo);
+                    Log.d("photoyes", person.getName());
+                }
             }
             contactCursor.close();
 
@@ -92,12 +96,6 @@ public class getContact {
                 Log.d("loops", "address");
             }
             addressCursor.close();
-            /**
-             String noteSelection = ContactsContract.Data.CONTACT_ID + " = ? AND " +;
-             String[] noteParams = new String[]{strContactId}
-             Cursor noteCursor = this.getContentResolver().query(nuri, null, )
-             */
-
 
             contactlist.add(person);
             Log.d("loops", "main");

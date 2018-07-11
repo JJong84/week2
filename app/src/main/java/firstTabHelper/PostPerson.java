@@ -46,7 +46,7 @@ public class PostPerson {
 
         JSONObject json = new JSONObject();
 
-        int length = 500;
+        int length = 30000;
 
         try {
             URL url = new URL(myurl);

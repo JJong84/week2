@@ -70,16 +70,21 @@ public class ListViewAdapter extends BaseAdapter {
 
         holder.name.setText(data.getName());
         holder.phone.setText(phoneHelper.parse(data.getPhone()));
-        /*
-        Bitmap bm = base.getBitmapFromString(data.getPhoto());
 
+        Bitmap bm;
+
+        if(data.getPhoto()=="None"){
+            bm = BitmapFactory.decodeResource(context.getResources(), R.mipmap.profile);
+        } else {
+            bm = base.getBitmapFromString(data.getPhoto());
+        }
 
         RoundedBitmapDrawable bd = RoundedBitmapDrawableFactory.create(context.getResources(), bm);
         bd.setCornerRadius(Math.max(bm.getWidth(), bm.getHeight()) / 2.0f);
         bd.setAntiAlias(true);
 
         holder.pic.setImageDrawable(bd);
-        */
+
         return convertView;
     }
 

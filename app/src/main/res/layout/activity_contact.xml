@@ -71,8 +71,8 @@
 
             <ImageView
                 android:id="@+id/photoView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/app_name"

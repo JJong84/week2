@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.util.Base64;
+import android.util.Log;
 
 import com.example.q.week2.R;
 
@@ -44,14 +45,31 @@ public class JSONHelper {
             for (int i = 0; i < jarray.length(); i++) {
                 person = new Person();
                 JSONObject jObject = jarray.getJSONObject(i);  // JSONObject 추출
-                person.setName(jObject.getString("name"));
-                person.setPhone(jObject.getString("phone"));
-                person.setEmail(jObject.getString("email"));
-                person.setAddress(jObject.getString("address"));
-                person.setPhoto(jObject.getString("profile"));
+                Log.d("REST GET3", "The response is : " + jObject.toString());
+                if(!jObject.isNull("name")){
+                    person.setName(jObject.getString("name"));
+                    Log.d("REST GET3", "The response is : " + jObject.getString("name"));
+                }
+                if(!jObject.isNull("phone")){
+                    person.setPhone(jObject.getString("phone"));
+                    Log.d("REST GET3", "The response is : " + jObject.getString("phone"));
+                }
+                if(!jObject.isNull("email")){
+                    person.setEmail(jObject.getString("email"));
+                    Log.d("REST GET3", "The response is : " + jObject.getString("email"));
+                }
+                if(!jObject.isNull("address")){
+                    person.setAddress(jObject.getString("address"));
+                    Log.d("REST GET3", "The response is : " + jObject.getString("address"));
+                }
+                if(!jObject.isNull("profile")){
+                    person.setPhoto(jObject.getString("profile"));
+                    Log.d("REST GET3", "The response is : " + jObject.getString("profile"));
+                }
                 contactlist.add(person);
             }
         } catch (JSONException e) {
+            Log.d("REST GET404", "");
             e.printStackTrace();
         }
         return contactlist;

@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,15 +85,21 @@ public class detailContact extends Activity {
             favorite.setText(R.string.af);
         }
 
-        /*
-        Bitmap bm = base.getBitmapFromString(person.getPhoto());
-        Log.d("bitmapsize", Integer.toString(bm.getByteCount()));
+        Bitmap bm;
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 8;
+        Log.d("bitmapsize", person.getPhoto());
+        if(person.getPhoto().equals("None")){
+            bm = BitmapFactory.decodeResource(this.getResources(), R.drawable.profile, options);
+        } else {
+            bm = BitmapFactory.decodeByteArray(Base64.decode(person.getPhoto(), Base64.DEFAULT), 0, Base64.decode(person.getPhoto(), Base64.DEFAULT).length, options);
+        }
         RoundedBitmapDrawable bd = RoundedBitmapDrawableFactory.create(getResources(), bm);
         bd.setCornerRadius(Math.max(bm.getWidth(), bm.getHeight()) / 2.0f);
         bd.setAntiAlias(true);
         Log.d("bitmapsize", Integer.toString(bm.getByteCount()));
         photoView.setImageDrawable(bd);
-        */
+
 
         call.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

@@ -1,6 +1,7 @@
 package com.example.q.week2;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -53,6 +54,7 @@ public class Tab1 extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab1);
 
+        Log.d("REST GET777", "dd");
         searchText = findViewById(R.id.searchText);
         lv = findViewById(R.id.lv);
         fav_lv = findViewById(R.id.lv_favorite);
@@ -64,9 +66,6 @@ public class Tab1 extends AppCompatActivity implements View.OnClickListener {
         contact = new ArrayList<Person>();
         contact.addAll(result);
 
-        //TODO
-        //merge();
-        //parser();
         fav_res = new ArrayList<Person>();
         not_res = new ArrayList<Person>();
 
@@ -143,6 +142,7 @@ public class Tab1 extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -157,12 +157,13 @@ public class Tab1 extends AppCompatActivity implements View.OnClickListener {
                         .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                //TODO:pload contactlist
                                 Log.d("connecttest", "1");
                                 DeletePerson delete = new DeletePerson();
-                                PostPerson post = new PostPerson();
                                 delete.deletePerson();
-                                post.postPerson(contact.get(0));
+                                for(int i=0; i<contact.size(); i++) {
+                                    PostPerson post = new PostPerson();
+                                    post.postPerson(contact.get(i));
+                                }
                                 Toast.makeText(getApplicationContext(), "Successfully uploaded.", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -180,19 +181,22 @@ public class Tab1 extends AppCompatActivity implements View.OnClickListener {
                         .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                //TODO:download contactlist
+                                ArrayList<Person> downCont = new ArrayList<Person>();
                                 GetPerson get = new GetPerson();
-                                ArrayList<Person> downloadList;
-                                JSONHelper jsonhelper = new JSONHelper();
+                                Log.d("REST GET999", "");
                                 try {
-                                    Log.d("REST GET12",  "");
-                                    get.getPerson();
-                                    Log.d("REST GET11",  "");
-                                    JSONArray json = new JSONArray(get.getList());
-                                    Log.d("REST GET5", "The response is : " + json.toString());
-                                    downloadList = jsonhelper.parser(json);
-                                    Log.d("REST GET6", "The response is : " + json.toString());
+                                    Log.d("REST GET999", "");
+                                    for(int i=0; i<contact.size(); i++){
+                                        contactHelper.deleteContact(contact.get(i), Tab1.this);
+                                    }
+                                    downCont = get.getPerson();
+                                    for(int i=0; i<downCont.size(); i++){
+                                        contactHelper.addContact(downCont.get(i), Tab1.this);
+                                    }
+                                    Log.d("REST14", downCont.get(0).getName());
                                     Toast.makeText(getApplicationContext(), "Successfully downloaded.", Toast.LENGTH_SHORT).show();
+                                    //TODO: refresh it
+
                                 } catch (Exception e){
                                     e.printStackTrace();
                                     Toast.makeText(getApplicationContext(), "Download failed.", Toast.LENGTH_SHORT).show();
