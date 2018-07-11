@@ -47,6 +47,8 @@
             android:theme="@style/Theme.AppCompat"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+        <activity
+            android:name=".ImagePopup" />
     </application>
 
 </manifest>
